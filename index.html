@@ -12,19 +12,65 @@
     <link rel="stylesheet" href="css/todo.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuejs-datepicker"></script>
-    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 </head>
 
 <body>
     <div id="app">
         <div class="todo-header">
             <a class="active" href="">My Task</a>
-            <a href="">In Progress</a>
-            <a href="">Completed</a>
+            <!-- <a href="">In Progress</a>
+            <a href="">Completed</a> -->
         </div>
         <div class="todo-body">
-            <button class="add-task" @click="addTodo">+ Add Task</button>
-            <div class="todo-item" :class="item.important ? 'important' : ''" v-if="todos.length" v-for="item in todos">
+            <button class="add-task" @click="adding = true">+ Add Task</button>
+            <!-- new form -->
+            <div class="todo-item" v-show="adding">
+                <div class="display">
+                    <div class="flex-wrap">
+                        <span class="completed">
+                            <i class="fas fa-square"></i>
+                        </span>
+                        <div class="title">
+                            <input type="text" v-model="newTodo.title" placeholder="Type Something Here...">
+                        </div>
+                        <span class="important">
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="edit">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                    </div>
+                </div>
+                <form class="expand">
+                    <div class="top-part">
+                        <p>
+                            <label><i class="far fa-calendar-alt"></i>Deadline</label>
+                        </p>
+                        <p>
+                            <vuejs-datepicker v-model="newTodo.deadline"></vuejs-datepicker>
+                        </p>
+                        <p>
+                            <label><i class="far fa-file"></i>File</label>
+                        </p>
+                        <p>
+                            <input type="file" @change="newTodo.file">
+                        </p>
+                        <p>
+                            <label><i class="far fa-comment-dots"></i>Comment</label>
+                        </p>
+                        <p>
+                            <textarea rows="4" cols="50" v-model="newTodo.comment"  placeholder="Type Something Here..."></textarea>
+                        </p>
+                    </div>
+                    <div class="flex-wrap">
+                        <button class="btn-reset"><i class="fas fa-times"></i>Cancel</button>
+                        <button class="btn-submit" @click="addTodo"><i class="fas fa-plus"></i>Save Task</button>
+                    </div>
+                </form>
+            </div>
+
+            <!--  existing -->
+            <div class="todo-item" :class="item.important ? 'important' : ''" v-if="todos.length" v-for="(item, index) in todos">
                 <div class="display">
                     <div class="flex-wrap">
                         <span class="completed" @click='item.completed = !item.completed'>
@@ -33,7 +79,7 @@
                         </span>
                         <div class="title striked" v-if="item.completed"><strike>{{ item.title }}</strike></div>
                         <div class="title" v-else-if="item.editing">
-                            <input type="text" v-model="editTitle">
+                            <input type="text" v-model="item.title">
                         </div>
                         <div class="title" v-else>{{ item.title }}</div>
                         <span class="important" @click='item.important = !item.important'>
@@ -47,7 +93,7 @@
                     </div>
                     <div class="marks">
                         <span class="calendar">
-                            <i class="far fa-calendar-alt"></i>
+                            <i class="far fa-calendar-alt"></i> {{ item.deadline }}
                         </span>
                         <span class="file" v-if="item.file">
                             <i class="far fa-file"></i>
@@ -60,20 +106,20 @@
                 <form class="expand" v-if='item.editing'>
                     <div class="top-part">
                         <p><label><i class="far fa-calendar-alt"></i>Deadline</label></p>
-                        <p><vuejs-datepicker v-model="editDeadline"></vuejs-datepicker></p>
+                        <p><vuejs-datepicker v-model="item.deadline"></vuejs-datepicker></p>
                         <p><label><i class="far fa-file"></i>File</label></p>
-                        <p><input type="file" v-model="editFile"></p>
+                        <p><input type="file" @change="item.file"></p>
                         <p><label><i class="far fa-comment-dots"></i>Comment</label></p>
-                        <p><textarea rows="4" cols="50" v-model="editComment">{{ item.comment }}</textarea></p>
+                        <p><textarea rows="4" cols="50" v-model="item.comment" placeholder="Type Comment Here..."></textarea></p>
                     </div>
                     <div class="flex-wrap">
-                        <button class="btn-reset"><i class="fas fa-times"></i>Cancel</button>
-                        <button class="btn-submit"><i class="fas fa-plus"></i>Save Task</button>
+                        <button class="btn-reset" @click="cancelEdit(item)"><i class="fas fa-times"></i>Cancel</button>
+                        <button class="btn-submit" @click="saveTodo(item)"><i class="fas fa-plus"></i>Save Task</button>
                     </div>
                 </form>
             </div>
-            <div class="todo-footer">
-                {{ todos.length }} tasks left
+            <div class="todo-footer" v-if="todos.length">
+                {{ taskLeft }} tasks left
             </div>
         </div>
     </div>
@@ -81,60 +127,49 @@
         let vm = new Vue({
             el: "#app",
             data: {
-                todos: [
-                    {
-                        title: 'Type Something Here...',
-                        deadline: '2018/6/11',
-                        file: '',
-                        comment: 'Type Comment Here...',
-                        important: false,
-                        completed: false,
-                        editing: false
-                    },
-                    {
-                        title: 'Type Something Here 2...',
-                        deadline: '2018/6/18',
-                        file: '',
-                        comment: 'Type Comment Here 2...',
-                        important: true,
-                        completed: true,
-                        editing: true
-                    }
-                ],
+                todos: [],
                 newTodo: {
-                    title: 'Type Something Here 2...',
-                    deadline: '2018/6/18',
+                    title: '',
+                    deadline: '',
                     file: '',
-                    comment: 'Type Comment Here 2...',
+                    comment: 'Type Comment Here...',
                     important: false,
                     completed: false,
-                    editing: true
+                    editing: false
                 },
-                editTitle: '',
-                editDeadline: '',
-                editFile: '',
-                editComment: ''
+                adding: false,
+            },
+            computed: {
+                taskLeft() {
+                    let remain = this.todos.filter(obj => obj.completed === false);
+                    return remain.length;
+                }
             },
             methods: {
+                loadTodos() {
+                    this.todos = JSON.parse(localStorage['todos']);
+                },
                 addTodo() {
-                    this.newTodo = {
-                        title: editTitle,
-                        deadline: editDeadline,
-                        file: editFile,
-                        comment: editComment,
-                        important: false,
-                        completed: false,
-                        editing: true
-                    }
-                    if (!newTitle) {
-                        return;
-                    }
-                    this.todos.push(this.newTodo);
-                    this.newTodo = '';
+                    let addTodo = this.newTodo;
+                    this.todos.unshift(addTodo);
+                    localStorage['todos'] = JSON.stringify(this.todos);
+                    this.adding = false;
+                },
+                saveTodo(item) {
+                    let saveTodos = this.todos;
+                    item.editing = false;
+                    localStorage['todos'] = JSON.stringify(saveTodos);
+                },
+                cancelEdit(item) {
+                    item.editing = false;
+                    return;
                 }
             },
             components: {
                 vuejsDatepicker
+            },
+            mounted() {
+                this.loadTodos();
             }
         });
     </script>
