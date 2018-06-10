@@ -13,7 +13,7 @@ body {
 }
 .todo-item{
     border-radius: 4px;
-    background-color: #fff;
+    background-color: #f2f2f2;
     margin-bottom: 8px;
     &.important {
         background-color: #FFF2DC;
@@ -28,12 +28,19 @@ body {
 
         }
     }
-    .completed,
     .edit {
         .far {
             color: #000;
         }
         .fas {
+            color: #4A90E2;
+        }
+    }
+    .completed {
+        .fa-square {
+            color: #fff;
+        }
+        .fa-check-square {
             color: #4A90E2;
         }
     }
@@ -138,4 +145,3 @@ body {
     max-width: 90%;
     margin: 0 auto;
 }
-.todo-checkbox{}

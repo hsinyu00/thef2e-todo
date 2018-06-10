@@ -2,7 +2,7 @@ body { background-color: #e1e1e1; font-family: 'Roboto', 'sans-serif'; }
 
 .add-task { width: 100%; background-color: #fff; border: 2px solid #c8c8c8; height: 65px; font-size: 24px; margin-bottom: 24px; }
 
-.todo-item { border-radius: 4px; background-color: #fff; margin-bottom: 8px; }
+.todo-item { border-radius: 4px; background-color: #f2f2f2; margin-bottom: 8px; }
 
 .todo-item.important { background-color: #FFF2DC; }
 
@@ -10,9 +10,13 @@ body { background-color: #e1e1e1; font-family: 'Roboto', 'sans-serif'; }
 
 .todo-item .title.striked { color: #9B9B9B; }
 
-.todo-item .completed .far, .todo-item .edit .far { color: #000; }
+.todo-item .edit .far { color: #000; }
 
-.todo-item .completed .fas, .todo-item .edit .fas { color: #4A90E2; }
+.todo-item .edit .fas { color: #4A90E2; }
+
+.todo-item .completed .fa-square { color: #fff; }
+
+.todo-item .completed .fa-check-square { color: #4A90E2; }
 
 .todo-item .important .far { color: #000; }
 
