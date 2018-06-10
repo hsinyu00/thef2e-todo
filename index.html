@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="content-language" content="zh-tw">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <title>TODO List - THE F2E</title>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500">
+    <link rel="stylesheet" href="css/todo.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+    <div id="app">
+        <div class="todo-header">
+            <a class="active" href="">My Task</a>
+            <a href="">In Progress</a>
+            <a href="">Completed</a>
+        </div>
+        <div class="todo-body">
+            <input class="add-task" type="text" placeholder="+ Add Task" v-model="newTodo" @keyup.enter="addTodo">
+            <div class="todo-item" :class="item.important ? 'important' : ''" v-if="todos.length" v-for="item in todos">
+                <div class="display">
+                    <div class="flex-wrap">
+                        <span class="completed">
+                            <i class="far fa-check-square" v-if="!item.completed"></i>
+                            <i class="fas fa-check-square" v-else></i>
+                        </span>
+                        <div class="title striked" v-if="item.completed"><strike>{{ item.title }}</strike></div>
+                        <div class="title" v-else>{{ item.title }}</div>
+                        <span class="important" @click='item.important = !item.important'>
+                            <i class="fas fa-star" v-if="item.important"></i>
+                            <i class="far fa-star" v-else></i>
+                        </span>
+                        <span class="edit" @click='item.editing = !item.editing'>
+                            <i class="fas fa-edit" v-if="item.editing"></i>
+                            <i class="far fa-edit" v-else></i>
+                        </span>
+                    </div>
+                    <div class="marks">
+                        <span class="calendar">
+                            <i class="far fa-calendar-alt"></i>
+                        </span>
+                        <span class="file" v-if="item.file">
+                            <i class="far fa-file"></i>
+                        </span>
+                        <span class="comment" v-if="item.comment">
+                            <i class="far fa-comment-dots"></i>
+                        </span>
+                    </div>
+                </div>
+                <form class="expand" v-if='item.editing'>
+                    <div class="top-part">
+                        <p><label><i class="far fa-calendar-alt"></i>Deadline</label></p>
+                        <p><input type="text" :disabled="!item.editing"></p>
+                        <p><label><i class="far fa-file"></i>File</label></p>
+                        <p><input type="file"></p>
+                        <p><label><i class="far fa-comment-dots"></i>Comment</label></p>
+                        <p><textarea rows="4" cols="50" :disabled="!item.editing">{{ item.comment }}</textarea></p>
+                    </div>
+                    <div class="flex-wrap">
+                        <button class="btn-reset"><i class="fas fa-times"></i>Cancel</button>
+                        <button class="btn-submit"><i class="fas fa-plus"></i>Save Task</button>
+                    </div>
+                </form>
+            </div>
+            <div class="todo-footer">
+                {{ todos.length }} tasks left
+            </div>
+        </div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                todos: [
+                    {
+                        title: 'Type Something Here...',
+                        deadline: '2018/6/11',
+                        file: '',
+                        comment: 'Type Comment Here...',
+                        important: false,
+                        completed: false,
+                        editing: false
+                    },
+                    {
+                        title: 'Type Something Here 2...',
+                        deadline: '2018/6/18',
+                        file: '',
+                        comment: 'Type Comment Here 2...',
+                        important: true,
+                        completed: true,
+                        editing: true
+                    }
+                ],
+                newTodo: []
+            },
+            methods: {
+                addTodo() {
+                    let value = this.newTodo && this.newTodo.trim();
+                    if (!value) {
+                        return;
+                    }
+                    this.todos.push({ title: value });
+                    this.newTodo = '';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+body { background-color: #e1e1e1; font-family: 'Roboto', 'sans-serif'; }
+
+.add-task { width: 100%; background-color: #fff; border: 2px solid #c8c8c8; height: 65px; font-size: 24px; margin-bottom: 24px; }
+
+.todo-item { border-radius: 4px; background-color: #fff; margin-bottom: 8px; }
+
+.todo-item.important { background-color: #FFF2DC; }
+
+.todo-item .title { color: #000; font-size: 24px; width: 435px; -webkit-box-flex: 0; -ms-flex: 0 1 auto; flex: 0 1 auto; }
+
+.todo-item .title.striked { color: #9B9B9B; }
+
+.todo-item .completed .far, .todo-item .edit .far { color: #000; }
+
+.todo-item .completed .fas, .todo-item .edit .fas { color: #4A90E2; }
+
+.todo-item .important .far { color: #000; }
+
+.todo-item .important .fas { color: #F5A623; }
+
+.todo-item .marks { color: #757575; }
+
+.todo-item .marks span { margin-right: 17px; }
+
+.todo-item .marks i { font-size: 16px; }
+
+.display { padding: 24px 32px 17px 72px; }
+
+.display .flex-wrap { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: nowrap; flex-wrap: nowrap; margin-bottom: 17px; }
+
+.display .flex-wrap span { margin-right: 32px; }
+
+.display i { font-size: 24px; }
+
+.expand { background-color: #f2f2f2; border-top: 2px solid #c8c8c8; -webkit-box-shadow: 0px 4px 4px 0px #757575; box-shadow: 0px 4px 4px 0px #757575; margin-bottom: 24px; }
+
+.expand .top-part { padding: 24px 32px 17px 72px; }
+
+.expand i { margin-right: 9px; }
+
+.expand label { font-size: 20px; }
+
+.expand .flex-wrap { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: nowrap; flex-wrap: nowrap; }
+
+.expand .btn-reset, .expand .btn-submit { -webkit-box-flex: 0; -ms-flex: 0 1 auto; flex: 0 1 auto; width: 50%; padding: 16px 0; font-size: 24px; background-image: none; border: 0; }
+
+.expand .btn-reset { color: #f00; background-color: #fff; }
+
+.expand .btn-submit { background-color: #4A90E2; color: #fff; }
+
+.todo-header { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: nowrap; flex-wrap: nowrap; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -ms-flex-line-pack: center; align-content: center; background-color: #4A90E2; margin-bottom: 24px; }
+
+.todo-header a { color: #00408B; font-size: 24px; width: 220px; -webkit-box-flex: 0; -ms-flex: 0 1 auto; flex: 0 1 auto; margin: 0px; padding: 25px 0 24px; text-decoration: none; text-align: center; }
+
+.todo-header a:link, .todo-header a:hover { text-decoration: none; }
+
+.todo-header a.active { color: #fff; }
+
+.todo-body { width: 620px; max-width: 90%; margin: 0 auto; }

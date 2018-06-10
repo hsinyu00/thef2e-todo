@@ -1,0 +1,141 @@
+
+body {
+    background-color: #e1e1e1;
+    font-family: 'Roboto', 'sans-serif'
+}
+.add-task {
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid #c8c8c8;
+    height: 65px;
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+.todo-item{
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 8px;
+    &.important {
+        background-color: #FFF2DC;
+    }
+    .title {
+        color: #000;
+        font-size: 24px;
+        width: 435px;
+        flex: 0 1 auto;
+        &.striked {
+            color: #9B9B9B;
+
+        }
+    }
+    .completed,
+    .edit {
+        .far {
+            color: #000;
+        }
+        .fas {
+            color: #4A90E2;
+        }
+    }
+    .important {
+        .far {
+            color: #000;
+        }
+        .fas {
+            color: #F5A623;
+        }
+    }
+    .marks {
+        color: #757575;
+        span {
+            margin-right: 17px;
+        }
+        i {
+            font-size: 16px;
+        }
+    }
+}
+.display {
+    padding: 24px 32px 17px 72px;
+    .flex-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-bottom: 17px;
+        span {
+            margin-right: 32px;
+        }
+    }
+    i {
+        font-size: 24px;
+    }
+}
+.expand {
+    background-color: #f2f2f2;
+    border-top: 2px solid #c8c8c8;
+    box-shadow: 0px 4px 4px 0px #757575;
+    margin-bottom: 24px;
+    .top-part {
+        padding: 24px 32px 17px 72px;
+    }
+    i {
+        margin-right: 9px;
+    }
+    label {
+        font-size: 20px;
+    }
+    .flex-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .btn-reset,
+    .btn-submit {
+        flex: 0 1 auto;
+        width: 50%;
+        padding: 16px 0;
+        font-size: 24px;
+        background-image: none;
+        border: 0;
+    }
+    .btn-reset {
+        color: #f00;
+        background-color: #fff;
+    }
+    .btn-submit {
+        background-color: #4A90E2;
+        color: #fff;
+    }
+}
+
+.todo-header{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: #4A90E2;
+    margin-bottom: 24px;
+    a {
+        color: #00408B;
+        font-size: 24px;
+        width: 220px;
+        flex: 0 1 auto;
+        margin: 0px;
+        padding: 25px 0 24px;
+        text-decoration: none;
+        text-align: center;
+    }
+    a:link,
+    a:hover {
+       text-decoration: none;
+    }
+    a.active {
+        color: #fff;
+    }
+}
+.todo-body {
+    width: 620px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+.todo-checkbox{}
